@@ -141,7 +141,7 @@ http server.
 Group:		Networking/WWW
 Summary:	Trac Integrated SCM & Project manager - sqlite database support
 Requires:       %{name}
-Requires:       python-sqlite      
+Requires:       python-sqlite2      
 Provides:       %{name}-db_backend
 
 %description sqlite
