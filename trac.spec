@@ -5,7 +5,7 @@
 #   wsgi, here to not pull anything ( ie, not pull apache ) or change the configuration
 
 # TODO people who want to use fcgi with lighttpd ?
-%define rel 1
+%define rel 2
 
 Name:		trac
 Version: 0.10.4
