@@ -159,6 +159,7 @@ Group:		Networking/WWW
 Summary:	Trac Integrated SCM & Project manager - postgresql database support
 Requires:       %{name}
 Requires:       python-psycopg    
+Requires:       pyPgSQL
 Provides:       %{name}-db_backend
 
 %description postgresql
