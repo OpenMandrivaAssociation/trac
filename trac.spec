@@ -18,6 +18,7 @@ Source1:    tracd.init
 Source2:    tracd.sysconfig
 Source3:    Trac.pm
 Url:		http://projects.edgewall.com/trac/wiki/TracDownload
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: python-devel 
 Requires:   python-clearsilver 
 Requires:   %{name}-frontend %{name}-db_backend %{name}-vcs_backend
