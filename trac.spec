@@ -17,6 +17,10 @@ Source0:    http://ftp.edgewall.com/pub/trac/%{name}-%{version}.tar.bz2
 Source1:    tracd.init
 Source2:    tracd.sysconfig
 Source3:    Trac.pm
+# Fix compatibility with PostgreSQL 8.3 in version control browser
+# http://trac.edgewall.org/changeset/6416
+Patch0:     trac-0.10.4-vc-pg8.3-compat.patch
+
 Url:		http://projects.edgewall.com/trac/wiki/TracDownload
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: python-devel 
@@ -208,6 +212,7 @@ version control system backend.
 
 %prep
 %setup -q
+%patch0 -p1 -b .vc-pg8.3-support
 
 %build
 cat > README.upgrade.urpmi << EOF
