@@ -5,26 +5,28 @@
 #   wsgi, here to not pull anything ( ie, not pull apache ) or change the configuration
 
 # TODO people who want to use fcgi with lighttpd ?
-%define rel 2
+%define rel 1
 
 Name:		trac
-Version: 0.10.4
+Version: 0.11
 Release: %mkrel %rel
 License:	BSD
 Group:		Networking/WWW
 Summary:	Integrated SCM & Project manager
-Source0:    http://ftp.edgewall.com/pub/trac/%{name}-%{version}.tar.bz2
+Source0:    http://ftp.edgewall.com/pub/trac/Trac-%{version}.tar.gz
 Source1:    tracd.init
 Source2:    tracd.sysconfig
 Source3:    Trac.pm
-# Fix compatibility with PostgreSQL 8.3 in version control browser
-# http://trac.edgewall.org/changeset/6416
-Patch0:     trac-0.10.4-vc-pg8.3-compat.patch
 
 Url:		http://projects.edgewall.com/trac/wiki/TracDownload
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: python-devel 
 Requires:   python-clearsilver 
+Requires:   python-genshi
+Requires:   python-pygments
+Requires:   python-silvercity
+Requires:   python-simplejson
+Requires:   python-textile
 Requires:   %{name}-frontend %{name}-db_backend %{name}-vcs_backend
 BuildArch:  noarch 
 %description
@@ -211,18 +213,25 @@ version control system backend.
 
 
 %prep
-%setup -q
-%patch0 -p1 -b .vc-pg8.3-support
+%setup -q -n Trac-%{version}
 
 %build
 cat > README.upgrade.urpmi << EOF
-Trac changed the format of the database since the last release.
-See the file UPGRADE, in %_defaultdocdir/%{name}-%{version}/.
+Trac changed the format of the database in the 0.10 release.
+If you are upgrading from a pre-0.10 version, please see the
+file UPGRADE, in %_defaultdocdir/%{name}-%{version}/.
+
+Remember you will need to run:
+  trac-admin <env-path> upgrade
+and
+  trac-admin <env-path> wiki upgrade
+to ensure your installation is up to date (remember to backup first!)
 
 In order to ease the installation, and provides more modularity, 
-trac package have been split in 2 frontends. You can choose 
-%{name}-standalone for a version with tracd, or %{name}-cgi 
-for the previous system. 
+trac package have been split in four frontends. You can choose 
+%{name}-standalone for a version with tracd, or %{name}-cgi,
+%{name}-fcgi or %{name}-mod_python for integration with
+a webserver (e.g. apache).
 
 EOF
 
@@ -336,8 +345,8 @@ cp %{name}.conf  $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf/webapps.d/
 cp %{name}_mod_python.conf $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf/webapps.d/
 cp %{name}_fcgi.conf $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf/webapps.d/
 
-mkdir -p $RPM_BUILD_ROOT/var/www/cgi-bin
-mv $RPM_BUILD_ROOT/%{_datadir}/%name/cgi-bin/trac.*cgi $RPM_BUILD_ROOT/var/www/cgi-bin/
+mkdir -p $RPM_BUILD_ROOT/var/www
+cp -ar cgi-bin $RPM_BUILD_ROOT/var/www
 
 mkdir -p $RPM_BUILD_ROOT/%{_initrddir}
 cat %{SOURCE1} >  $RPM_BUILD_ROOT/%{_initrddir}/%{name}d 
@@ -380,9 +389,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc INSTALL   RELEASE UPGRADE doc THANKS contrib
 %doc README.upgrade.urpmi
 
-%{_datadir}/%{name}
 %{_bindir}/%{name}-admin
-%_mandir/man1/*
 %{py_puresitedir}/%{name}/
 %if %{mdkversion} > 200700
 %{py_puresitedir}/*.egg-info
@@ -393,7 +400,6 @@ rm -rf $RPM_BUILD_ROOT
  
 %files standalone
 %defattr(-,root,root)
-%doc README.tracd
 %config(noreplace) %{_initrddir}/%{name}d
 %config(noreplace) %{_sysconfdir}/sysconfig/%{name}d
 %{_bindir}/%{name}d
