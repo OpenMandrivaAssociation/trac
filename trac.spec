@@ -333,36 +333,36 @@ and reload tracd, with service tracd restart.
 EOF
 %install
 
-rm -rf $RPM_BUILD_ROOT
-python ./setup.py install --root=$RPM_BUILD_ROOT --prefix=%_prefix
+rm -rf %{buildroot}
+python ./setup.py install --root=%{buildroot} --prefix=%_prefix
 
 #change default config
-perl -pi -e "s#$RPM_BUILD_ROOT##" $RPM_BUILD_ROOT/%{_libdir}/python%{pyver}/site-packages/%{name}/siteconfig.py
-rm -f $RPM_BUILD_ROOT/%{_libdir}/python%{pyver}/site-packages/%{name}/siteconfig.pyc
+perl -pi -e "s#%{buildroot}##" %{buildroot}/%{_libdir}/python%{pyver}/site-packages/%{name}/siteconfig.py
+rm -f %{buildroot}/%{_libdir}/python%{pyver}/site-packages/%{name}/siteconfig.pyc
 
-mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf/webapps.d
-cp %{name}.conf  $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf/webapps.d/
-cp %{name}_mod_python.conf $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf/webapps.d/
-cp %{name}_fcgi.conf $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf/webapps.d/
+mkdir -p %{buildroot}/%{_sysconfdir}/httpd/conf/webapps.d
+cp %{name}.conf  %{buildroot}/%{_sysconfdir}/httpd/conf/webapps.d/
+cp %{name}_mod_python.conf %{buildroot}/%{_sysconfdir}/httpd/conf/webapps.d/
+cp %{name}_fcgi.conf %{buildroot}/%{_sysconfdir}/httpd/conf/webapps.d/
 
-mkdir -p $RPM_BUILD_ROOT/var/www
-cp -ar cgi-bin $RPM_BUILD_ROOT/var/www
+mkdir -p %{buildroot}/var/www
+cp -ar cgi-bin %{buildroot}/var/www
 
-mkdir -p $RPM_BUILD_ROOT/%{_initrddir}
-cat %{SOURCE1} >  $RPM_BUILD_ROOT/%{_initrddir}/%{name}d 
-chmod 0755 $RPM_BUILD_ROOT/%{_initrddir}/%{name}d
+mkdir -p %{buildroot}/%{_initrddir}
+cat %{SOURCE1} >  %{buildroot}/%{_initrddir}/%{name}d 
+chmod 0755 %{buildroot}/%{_initrddir}/%{name}d
 
-mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/sysconfig/
-cat %{SOURCE2} >  $RPM_BUILD_ROOT/%{_sysconfdir}/sysconfig/%{name}d
+mkdir -p %{buildroot}/%{_sysconfdir}/sysconfig/
+cat %{SOURCE2} >  %{buildroot}/%{_sysconfdir}/sysconfig/%{name}d
 
-mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/wizard.d/
-cp wizard.trac.conf $RPM_BUILD_ROOT/%{_sysconfdir}/wizard.d/%{name}.conf
+mkdir -p %{buildroot}/%{_sysconfdir}/wizard.d/
+cp wizard.trac.conf %{buildroot}/%{_sysconfdir}/wizard.d/%{name}.conf
 
-mkdir -p $RPM_BUILD_ROOT/%{perl_vendorlib}/MDK/Wizard/
-cat %{SOURCE3} >  $RPM_BUILD_ROOT/%{perl_vendorlib}/MDK/Wizard/Trac.pm
+mkdir -p %{buildroot}/%{perl_vendorlib}/MDK/Wizard/
+cat %{SOURCE3} >  %{buildroot}/%{perl_vendorlib}/MDK/Wizard/Trac.pm
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %post cgi
 %{_initrddir}/httpd reload
