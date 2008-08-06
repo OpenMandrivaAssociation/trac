@@ -20,7 +20,7 @@ Source3:    Trac.pm
 
 Url:		http://projects.edgewall.com/trac/wiki/TracDownload
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: python-devel
+BuildRequires: python-devel python-setuptools
 Requires:   python-clearsilver
 Requires:   python-genshi
 Requires:   python-pygments
