@@ -1,7 +1,7 @@
 # rationale behind the splitting
 # every database backend is here to pull the proper database module
 # every vcs backend is here for the same reason
-# frontend are here to place specific configuration files, except 
+# frontend are here to place specific configuration files, except
 #   wsgi, here to not pull anything ( ie, not pull apache ) or change the configuration
 
 # TODO people who want to use fcgi with lighttpd ?
@@ -20,20 +20,20 @@ Source3:    Trac.pm
 
 Url:		http://projects.edgewall.com/trac/wiki/TracDownload
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: python-devel 
-Requires:   python-clearsilver 
+BuildRequires: python-devel
+Requires:   python-clearsilver
 Requires:   python-genshi
 Requires:   python-pygments
 Requires:   python-silvercity
 Requires:   python-simplejson
 Requires:   python-textile
 Requires:   %{name}-frontend %{name}-db_backend %{name}-vcs_backend
-BuildArch:  noarch 
+BuildArch:  noarch
 %description
 Trac is a minimalistic web-based software project management
 and bug/issue tracking system. It provides an interface to
-revision control systems (Subversion), an integrated 
-Wiki and convenient report facilities. 
+revision control systems (Subversion), an integrated
+Wiki and convenient report facilities.
 
 
 %package cgi
@@ -48,8 +48,8 @@ Provides:       %{name}-frontend
 %description cgi
 Trac is a minimalistic web-based software project management
 and bug/issue tracking system. It provides an interface to
-revision control systems (Subversion), an integrated 
-Wiki and convenient report facilities. 
+revision control systems (Subversion), an integrated
+Wiki and convenient report facilities.
 
 This package contains various files needed to integrate it
 with apache.
@@ -66,8 +66,8 @@ Provides:       %{name}-frontend
 %description fcgi
 Trac is a minimalistic web-based software project management
 and bug/issue tracking system. It provides an interface to
-revision control systems (Subversion), an integrated 
-Wiki and convenient report facilities. 
+revision control systems (Subversion), an integrated
+Wiki and convenient report facilities.
 
 This package contains various files needed to integrate it
 with apache and fcgi.
@@ -82,11 +82,11 @@ Provides:       %{name}-frontend
 %description wsgi
 Trac is a minimalistic web-based software project management
 and bug/issue tracking system. It provides an interface to
-revision control systems (Subversion), an integrated 
-Wiki and convenient report facilities. 
+revision control systems (Subversion), an integrated
+Wiki and convenient report facilities.
 
 This package contains various files needed to integrate it
-with a wsgi (Web Server Gateway Interface) compliant server, 
+with a wsgi (Web Server Gateway Interface) compliant server,
 such as Twisted or Paste.
 
 %package mod_python
@@ -100,8 +100,8 @@ Provides:       %{name}-frontend
 %description mod_python
 Trac is a minimalistic web-based software project management
 and bug/issue tracking system. It provides an interface to
-revision control systems (Subversion), an integrated 
-Wiki and convenient report facilities. 
+revision control systems (Subversion), an integrated
+Wiki and convenient report facilities.
 
 This package contains various files needed to integrate it
 with apache and mod_python by default.
@@ -117,8 +117,8 @@ Summary:	Trac Integrated SCM & Project manager - project creation wizard
 %description -n drakwizard-%{name}
 Trac is a minimalistic web-based software project management
 and bug/issue tracking system. It provides an interface to
-revision control systems (Subversion), an integrated 
-Wiki and convenient report facilities. 
+revision control systems (Subversion), an integrated
+Wiki and convenient report facilities.
 
 This package provides a wizard to create trac multiple project
 repository using tracd.
@@ -136,8 +136,8 @@ Requires(pre):  rpm-helper
 %description standalone
 Trac is a minimalistic web-based software project management
 and bug/issue tracking system. It provides an interface to
-revision control systems (Subversion), an integrated 
-Wiki and convenient report facilities. 
+revision control systems (Subversion), an integrated
+Wiki and convenient report facilities.
 
 This package contains various files needed to run as standalone
 http server.
@@ -147,14 +147,14 @@ http server.
 Group:		Networking/WWW
 Summary:	Trac Integrated SCM & Project manager - sqlite database support
 Requires:       %{name}
-Requires:       python-sqlite2      
+Requires:       python-sqlite2
 Provides:       %{name}-db_backend
 
 %description sqlite
 Trac is a minimalistic web-based software project management
 and bug/issue tracking system. It provides an interface to
-revision control systems (Subversion), an integrated 
-Wiki and convenient report facilities. 
+revision control systems (Subversion), an integrated
+Wiki and convenient report facilities.
 
 This package contains the needed modules to use sqlite as trac
 database backend.
@@ -164,15 +164,15 @@ database backend.
 Group:		Networking/WWW
 Summary:	Trac Integrated SCM & Project manager - postgresql database support
 Requires:       %{name}
-Requires:       python-psycopg    
+Requires:       python-psycopg
 Requires:       pyPgSQL
 Provides:       %{name}-db_backend
 
 %description postgresql
 Trac is a minimalistic web-based software project management
 and bug/issue tracking system. It provides an interface to
-revision control systems (Subversion), an integrated 
-Wiki and convenient report facilities. 
+revision control systems (Subversion), an integrated
+Wiki and convenient report facilities.
 
 This package contains the needed modules to use postgresql as trac
 database backend.
@@ -182,14 +182,14 @@ database backend.
 Group:		Networking/WWW
 Summary:	Trac Integrated SCM & Project manager - mysql database support
 Requires:       %{name}
-Requires:       python-mysql  
+Requires:       python-mysql
 Provides:       %{name}-db_backend
 
 %description mysql
 Trac is a minimalistic web-based software project management
 and bug/issue tracking system. It provides an interface to
-revision control systems (Subversion), an integrated 
-Wiki and convenient report facilities. 
+revision control systems (Subversion), an integrated
+Wiki and convenient report facilities.
 
 This package contains the needed modules to use mysql as trac
 database backend.
@@ -199,14 +199,14 @@ Beware, the module is still experimental for the moment.
 Group:		Networking/WWW
 Summary:	Trac Integrated SCM & Project manager - subversion support
 Requires:       %{name}
-Requires:       python-svn subversion     
-Provides:       %{name}-vcs_backend 
+Requires:       python-svn subversion
+Provides:       %{name}-vcs_backend
 
 %description svn
 Trac is a minimalistic web-based software project management
 and bug/issue tracking system. It provides an interface to
-revision control systems (Subversion), an integrated 
-Wiki and convenient report facilities. 
+revision control systems (Subversion), an integrated
+Wiki and convenient report facilities.
 
 This package contains the needed modules to use subversion as trac
 version control system backend.
@@ -227,8 +227,8 @@ and
   trac-admin <env-path> wiki upgrade
 to ensure your installation is up to date (remember to backup first!)
 
-In order to ease the installation, and provides more modularity, 
-trac package have been split in four frontends. You can choose 
+In order to ease the installation, and provides more modularity,
+trac package have been split in four frontends. You can choose
 %{name}-standalone for a version with tracd, or %{name}-cgi,
 %{name}-fcgi or %{name}-mod_python for integration with
 a webserver (e.g. apache).
@@ -272,7 +272,7 @@ PassEnv LANG
 
 #<Location /projects/myproject>
 #   SetHandler mod_python
-#   PythonHandler trac.web.modpython_frontend 
+#   PythonHandler trac.web.modpython_frontend
 #   PythonOption TracEnv /var/trac/myproject
 #   PythonOption TracUriRoot /projects/myproject
 #</Location>
@@ -326,7 +326,7 @@ developers.
 $ trac-admin \$TRAC_REPOSITORY_PATH initenv \$PROJECT_NAME
 
 3) integration with tracd
-in order to use your new trac project, you need to add it to tracd config 
+in order to use your new trac project, you need to add it to tracd config
 file, in /etc/sysconfig/tracd. All you need is to add it to PROJECT,
 and reload tracd, with service tracd restart.
 
@@ -349,7 +349,7 @@ mkdir -p %{buildroot}/var/www
 cp -ar cgi-bin %{buildroot}/var/www
 
 mkdir -p %{buildroot}/%{_initrddir}
-cat %{SOURCE1} >  %{buildroot}/%{_initrddir}/%{name}d 
+cat %{SOURCE1} >  %{buildroot}/%{_initrddir}/%{name}d
 chmod 0755 %{buildroot}/%{_initrddir}/%{name}d
 
 mkdir -p %{buildroot}/%{_sysconfdir}/sysconfig/
@@ -385,7 +385,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%doc AUTHORS  ChangeLog README COPYING 
+%doc AUTHORS  ChangeLog README COPYING
 %doc INSTALL   RELEASE UPGRADE doc THANKS contrib
 %doc README.upgrade.urpmi
 
@@ -397,7 +397,7 @@ rm -rf %{buildroot}
 %exclude %{py_puresitedir}/%{name}/web/modpython_frontend.py*
 %exclude %{py_puresitedir}/%{name}/web/fcgi_frontend.py*
 %exclude %{py_puresitedir}/%{name}/web/_fcgi.py*
- 
+
 %files standalone
 %defattr(-,root,root)
 %config(noreplace) %{_initrddir}/%{name}d
