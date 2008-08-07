@@ -5,7 +5,7 @@
 #   wsgi, here to not pull anything ( ie, not pull apache ) or change the configuration
 
 # TODO people who want to use fcgi with lighttpd ?
-%define rel 1
+%define rel 2
 
 Name:		trac
 Version: 0.11.1
@@ -27,6 +27,7 @@ Requires:   python-pygments
 Requires:   python-silvercity
 Requires:   python-simplejson
 Requires:   python-textile
+Requires:   python-setuptools
 Requires:   %{name}-frontend %{name}-db_backend %{name}-vcs_backend
 BuildArch:  noarch
 %description
