@@ -8,7 +8,7 @@
 %define rel 1
 
 Name:		trac
-Version: 0.11
+Version: 0.11.1
 Release: %mkrel %rel
 License:	BSD
 Group:		Networking/WWW
