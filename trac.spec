@@ -5,35 +5,37 @@
 #   wsgi, here to not pull anything ( ie, not pull apache ) or change the configuration
 
 # TODO people who want to use fcgi with lighttpd ?
-%define rel 1
 
+Summary:	Integrated SCM & Project manager
 Name:		trac
-Version: 0.11.2
-Release: %mkrel %rel
+Version:	0.11.2.1
+Release:	%mkrel 1
 License:	BSD
 Group:		Networking/WWW
-Summary:	Integrated SCM & Project manager
-Source0:    http://ftp.edgewall.com/pub/trac/Trac-%{version}.tar.gz
-Source1:    tracd.init
-Source2:    tracd.sysconfig
-Source3:    Trac.pm
-
-Url:		http://projects.edgewall.com/trac/wiki/TracDownload
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: python-devel python-setuptools
-Requires:   python-clearsilver
-Requires:   python-genshi
-Requires:   python-pygments
-Requires:   python-silvercity
-Requires:   python-simplejson
-Requires:   python-textile
+Url:		http://trac.edgewall.org/
+Source0:	ftp://ftp.edgewall.com/pub/trac/Trac-%{version}.tar.gz
+Source1:	tracd.init
+Source2:	tracd.sysconfig
+Source3:	Trac.pm
+BuildRequires:	python-devel
+BuildRequires:	python-setuptools
+Requires:	python-clearsilver
+Requires:	python-genshi
+Requires:	python-pygments
+Requires:	python-silvercity
+Requires:	python-simplejson
+Requires:	python-textile
 %if %mdkversion > 200900
 Requires:	python-pkg-resources
 %else
-Requires:   python-setuptools
+Requires:	python-setuptools
 %endif
-Requires:   %{name}-frontend %{name}-db_backend %{name}-vcs_backend
-BuildArch:  noarch
+Requires:	%{name}-frontend
+Requires:	%{name}-db_backend
+Requires:	%{name}-vcs_backend
+BuildArch:	noarch
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+
 %description
 Trac is a minimalistic web-based software project management
 and bug/issue tracking system. It provides an interface to
@@ -42,13 +44,12 @@ Wiki and convenient report facilities.
 
 
 %package cgi
-Group:		Networking/WWW
 Summary:	Trac Integrated SCM & Project manager - cgi frontend
 Group:		Networking/WWW
-Requires:       %{name}
+Requires:	%{name} = %{version}-%{release}
 # it can work with any cgi webserver, but only apache is covered by the package
-Requires:       webserver
-Provides:       %{name}-frontend
+Requires:	webserver
+Provides:	%{name}-frontend
 
 %description cgi
 Trac is a minimalistic web-based software project management
@@ -60,13 +61,12 @@ This package contains various files needed to integrate it
 with apache.
 
 %package fcgi
-Group:		Networking/WWW
 Summary:	Trac Integrated SCM & Project manager - cgi frontend
 Group:		Networking/WWW
-Requires:       %{name}
+Requires:	%{name} = %{version}-%{release}
 # it can work with any fcgi webserver, but only apache is covered by the package
-Requires:       apache-mod_fcgid
-Provides:       %{name}-frontend
+Requires:	apache-mod_fcgid
+Provides:	%{name}-frontend
 
 %description fcgi
 Trac is a minimalistic web-based software project management
@@ -78,11 +78,10 @@ This package contains various files needed to integrate it
 with apache and fcgi.
 
 %package wsgi
-Group:		Networking/WWW
 Summary:	Trac Integrated SCM & Project manager - wsgi frontend
 Group:		Networking/WWW
-Requires:       %{name}
-Provides:       %{name}-frontend
+Requires:	%{name} = %{version}-%{release}
+Provides:	%{name}-frontend
 
 %description wsgi
 Trac is a minimalistic web-based software project management
@@ -95,12 +94,11 @@ with a wsgi (Web Server Gateway Interface) compliant server,
 such as Twisted or Paste.
 
 %package mod_python
-Group:		Networking/WWW
 Summary:	Trac Integrated SCM & Project manager - mod_python frontend
 Group:		Networking/WWW
-Requires:       %{name}
-Requires:       apache-mod_python
-Provides:       %{name}-frontend
+Requires:	%{name} = %{version}-%{release}
+Requires:	apache-mod_python
+Provides:	%{name}-frontend
 
 %description mod_python
 Trac is a minimalistic web-based software project management
@@ -115,9 +113,8 @@ with apache and mod_python by default.
 
 
 %package -n drakwizard-%{name}
-Group:		System/Configuration/Other
 Summary:	Trac Integrated SCM & Project manager - project creation wizard
-
+Group:		System/Configuration/Other
 
 %description -n drakwizard-%{name}
 Trac is a minimalistic web-based software project management
@@ -132,11 +129,11 @@ You can access it with drakwizard or with Mandriva control center.
 
 
 %package standalone
-Group:		Networking/WWW
 Summary:	Trac Integrated SCM & Project manager - standalone frontend
-Requires:       %{name}
-Provides:       %{name}-frontend
-Requires(pre):  rpm-helper
+Group:		Networking/WWW
+Requires:	%{name} = %{version}-%{release}
+Provides:	%{name}-frontend
+Requires(pre):	rpm-helper
 
 %description standalone
 Trac is a minimalistic web-based software project management
@@ -149,11 +146,11 @@ http server.
 
 
 %package sqlite
-Group:		Networking/WWW
 Summary:	Trac Integrated SCM & Project manager - sqlite database support
-Requires:       %{name}
-Requires:       python-sqlite2
-Provides:       %{name}-db_backend
+Group:		Networking/WWW
+Requires:	%{name} = %{version}-%{release}
+Requires:	python-sqlite2
+Provides:	%{name}-db_backend
 
 %description sqlite
 Trac is a minimalistic web-based software project management
@@ -166,12 +163,12 @@ database backend.
 
 
 %package postgresql
-Group:		Networking/WWW
 Summary:	Trac Integrated SCM & Project manager - postgresql database support
-Requires:       %{name}
-Requires:       python-psycopg
-Requires:       pyPgSQL
-Provides:       %{name}-db_backend
+Group:		Networking/WWW
+Requires:	%{name} = %{version}-%{release}
+Requires:	python-psycopg
+Requires:	pyPgSQL
+Provides:	%{name}-db_backend
 
 %description postgresql
 Trac is a minimalistic web-based software project management
@@ -184,11 +181,11 @@ database backend.
 
 
 %package mysql
-Group:		Networking/WWW
 Summary:	Trac Integrated SCM & Project manager - mysql database support
-Requires:       %{name}
-Requires:       python-mysql
-Provides:       %{name}-db_backend
+Group:		Networking/WWW
+Requires:	%{name} = %{version}-%{release}
+Requires:	python-mysql
+Provides:	%{name}-db_backend
 
 %description mysql
 Trac is a minimalistic web-based software project management
@@ -201,11 +198,12 @@ database backend.
 Beware, the module is still experimental for the moment.
 
 %package svn
-Group:		Networking/WWW
 Summary:	Trac Integrated SCM & Project manager - subversion support
-Requires:       %{name}
-Requires:       python-svn subversion
-Provides:       %{name}-vcs_backend
+Group:		Networking/WWW
+Requires:	%{name}
+Requires:	python-svn
+Requires:	subversion
+Provides:	%{name}-vcs_backend
 
 %description svn
 Trac is a minimalistic web-based software project management
@@ -224,7 +222,7 @@ version control system backend.
 cat > README.upgrade.urpmi << EOF
 Trac changed the format of the database in the 0.10 release.
 If you are upgrading from a pre-0.10 version, please see the
-file UPGRADE, in %_defaultdocdir/%{name}-%{version}/.
+file UPGRADE, in %{_defaultdocdir}/%{name}-%{version}/.
 
 Remember you will need to run:
   trac-admin <env-path> upgrade
@@ -339,7 +337,7 @@ EOF
 %install
 
 rm -rf %{buildroot}
-python ./setup.py install --root=%{buildroot} --prefix=%_prefix
+python ./setup.py install --root=%{buildroot} --prefix=%{_prefix}
 
 #change default config
 perl -pi -e "s#%{buildroot}##" %{buildroot}/%{_libdir}/python%{pyver}/site-packages/%{name}/siteconfig.py
@@ -390,8 +388,8 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%doc AUTHORS  ChangeLog README COPYING
-%doc INSTALL   RELEASE UPGRADE doc THANKS contrib
+%doc AUTHORS ChangeLog README
+%doc RELEASE UPGRADE doc THANKS contrib
 %doc README.upgrade.urpmi
 
 %{_bindir}/%{name}-admin
@@ -414,7 +412,6 @@ rm -rf %{buildroot}
 /var/www/cgi-bin/%{name}.cgi
 %config(noreplace) %{_sysconfdir}/httpd/conf/webapps.d/%{name}.conf
 
-
 %files fcgi
 %defattr(-,root,root)
 /var/www/cgi-bin/%{name}.fcgi
@@ -422,12 +419,10 @@ rm -rf %{buildroot}
 %{py_puresitedir}/%{name}/web/fcgi_frontend.py*
 %{py_puresitedir}/%{name}/web/_fcgi.py*
 
-
 %files mod_python
 %defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/httpd/conf/webapps.d/%{name}_mod_python.conf
 %{py_puresitedir}/%{name}/web/modpython_frontend.py*
-
 
 # empty subpackages, to pull deps.
 # trac already does autodetection, and the default list of component
@@ -457,5 +452,3 @@ rm -rf %{buildroot}
 %doc README.wizard
 %{perl_vendorlib}/MDK/Wizard/*
 %config(noreplace) %{_sysconfdir}/wizard.d/%{name}.conf
-
-
