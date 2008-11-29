@@ -27,7 +27,11 @@ Requires:   python-pygments
 Requires:   python-silvercity
 Requires:   python-simplejson
 Requires:   python-textile
+%if %mdkversion > 200900
+Requires:	python-pkg-resources
+%else
 Requires:   python-setuptools
+%endif
 Requires:   %{name}-frontend %{name}-db_backend %{name}-vcs_backend
 BuildArch:  noarch
 %description
