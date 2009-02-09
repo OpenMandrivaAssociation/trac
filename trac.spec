@@ -9,7 +9,7 @@
 Summary:	Integrated SCM & Project manager
 Name:		trac
 Version:	0.11.2.1
-Release:	%mkrel 3
+Release:	%mkrel 4
 License:	BSD
 Group:		Networking/WWW
 Url:		http://trac.edgewall.org/
@@ -27,9 +27,8 @@ Requires:	python-simplejson
 Requires:	python-textile
 %if %mdkversion > 200900
 Requires:	python-pkg-resources
-%else
-Requires:	python-setuptools
 %endif
+Requires:	python-setuptools
 Requires:	%{name}-frontend
 Requires:	%{name}-db_backend
 Requires:	%{name}-vcs_backend
