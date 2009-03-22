@@ -8,12 +8,12 @@
 
 Summary:	Integrated SCM & Project manager
 Name:		trac
-Version:	0.11.3
-Release:	%mkrel 1
+Version:	0.11.4
+Release:	%mkrel 0.1
 License:	BSD
 Group:		Networking/WWW
 Url:		http://trac.edgewall.org/
-Source0:	ftp://ftp.edgewall.com/pub/trac/Trac-%{version}.tar.gz
+Source0:	ftp://ftp.edgewall.com/pub/trac/Trac-%{version}rc1.tar.gz
 Source1:	tracd.init
 Source2:	tracd.sysconfig
 Source3:	Trac.pm
@@ -215,7 +215,7 @@ version control system backend.
 
 
 %prep
-%setup -q -n Trac-%{version}
+%setup -q -n Trac-%{version}rc1
 
 %build
 cat > README.upgrade.urpmi << EOF
