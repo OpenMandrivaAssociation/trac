@@ -8,7 +8,7 @@
 
 Summary:	Integrated SCM & Project manager
 Name:		trac
-Version:	0.11.5
+Version:	0.11.6
 Release:	%mkrel 1
 License:	BSD
 Group:		Networking/WWW
