@@ -9,7 +9,7 @@
 Summary:	Integrated SCM & Project manager
 Name:		trac
 Version:	0.11.6
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	BSD
 Group:		Networking/WWW
 Url:		http://trac.edgewall.org/
@@ -367,17 +367,34 @@ cat %{SOURCE3} >  %{buildroot}/%{perl_vendorlib}/MDK/Wizard/Trac.pm
 rm -rf %{buildroot}
 
 %post cgi
-%{_initrddir}/httpd reload
+%if %mdkversion < 201010
+%_post_webapp
+%endif
 
 %postun cgi
-%{_initrddir}/httpd reload
+%if %mdkversion < 201010
+%_postun_webapp
+%endif
 
 %post fcgi
-%{_initrddir}/httpd reload
+%if %mdkversion < 201010
+%_post_webapp
+%endif
 
 %postun fcgi
-%{_initrddir}/httpd reload
+%if %mdkversion < 201010
+%_postun_webapp
+%endif
 
+%post mod_python
+%if %mdkversion < 201010
+%_post_webapp
+%endif
+
+%postun mod_python
+%if %mdkversion < 201010
+%_postun_webapp
+%endif
 
 %post standalone
 %_post_service tracd
