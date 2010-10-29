@@ -9,7 +9,7 @@
 Summary:	Integrated SCM & Project manager
 Name:		trac
 Version:	0.11.7
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	BSD
 Group:		Networking/WWW
 Url:		http://trac.edgewall.org/
