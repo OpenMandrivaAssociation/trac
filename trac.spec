@@ -8,8 +8,8 @@
 
 Summary:	Integrated SCM & Project manager
 Name:		trac
-Version:	0.11.7
-Release:	%mkrel 2
+Version:	0.12.1
+Release:	%mkrel 1
 License:	BSD
 Group:		Networking/WWW
 Url:		http://trac.edgewall.org/
@@ -409,6 +409,7 @@ rm -rf %{buildroot}
 %doc README.upgrade.urpmi
 
 %{_bindir}/%{name}-admin
+%{py_puresitedir}/tracopt/
 %{py_puresitedir}/%{name}/
 %if %{mdkversion} > 200700
 %{py_puresitedir}/*.egg-info
