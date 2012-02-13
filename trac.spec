@@ -8,8 +8,8 @@
 
 Summary:	Integrated SCM & Project manager
 Name:		trac
-Version:	0.12.1
-Release:	%mkrel 1
+Version:	0.12.3
+Release:	1
 License:	BSD
 Group:		Networking/WWW
 Url:		http://trac.edgewall.org/
@@ -25,15 +25,11 @@ Requires:	python-pygments
 Requires:	python-silvercity
 Requires:	python-simplejson
 Requires:	python-textile
-%if %mdkversion > 200900
-Requires:	python-pkg-resources
-%endif
 Requires:	python-setuptools
 Requires:	%{name}-frontend
 Requires:	%{name}-db_backend
 Requires:	%{name}-vcs_backend
 BuildArch:	noarch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Trac is a minimalistic web-based software project management
@@ -335,7 +331,6 @@ and reload tracd, with service tracd restart.
 EOF
 %install
 
-rm -rf %{buildroot}
 python ./setup.py install --root=%{buildroot} --prefix=%{_prefix}
 
 #change default config
@@ -363,38 +358,6 @@ cp wizard.trac.conf %{buildroot}/%{_sysconfdir}/wizard.d/%{name}.conf
 mkdir -p %{buildroot}/%{perl_vendorlib}/MDK/Wizard/
 cat %{SOURCE3} >  %{buildroot}/%{perl_vendorlib}/MDK/Wizard/Trac.pm
 
-%clean
-rm -rf %{buildroot}
-
-%post cgi
-%if %mdkversion < 201010
-%_post_webapp
-%endif
-
-%postun cgi
-%if %mdkversion < 201010
-%_postun_webapp
-%endif
-
-%post fcgi
-%if %mdkversion < 201010
-%_post_webapp
-%endif
-
-%postun fcgi
-%if %mdkversion < 201010
-%_postun_webapp
-%endif
-
-%post mod_python
-%if %mdkversion < 201010
-%_post_webapp
-%endif
-
-%postun mod_python
-%if %mdkversion < 201010
-%_postun_webapp
-%endif
 
 %post standalone
 %_post_service tracd
@@ -403,7 +366,6 @@ rm -rf %{buildroot}
 %_preun_service tracd
 
 %files
-%defattr(-,root,root)
 %doc AUTHORS ChangeLog README
 %doc RELEASE UPGRADE doc THANKS contrib
 %doc README.upgrade.urpmi
@@ -419,25 +381,21 @@ rm -rf %{buildroot}
 %exclude %{py_puresitedir}/%{name}/web/_fcgi.py*
 
 %files standalone
-%defattr(-,root,root)
 %config(noreplace) %{_initrddir}/%{name}d
 %config(noreplace) %{_sysconfdir}/sysconfig/%{name}d
 %{_bindir}/%{name}d
 
 %files cgi
-%defattr(-,root,root)
 /var/www/cgi-bin/%{name}.cgi
 %config(noreplace) %{_sysconfdir}/httpd/conf/webapps.d/%{name}.conf
 
 %files fcgi
-%defattr(-,root,root)
 /var/www/cgi-bin/%{name}.fcgi
 %config(noreplace) %{_sysconfdir}/httpd/conf/webapps.d/%{name}_fcgi.conf
 %{py_puresitedir}/%{name}/web/fcgi_frontend.py*
 %{py_puresitedir}/%{name}/web/_fcgi.py*
 
 %files mod_python
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/httpd/conf/webapps.d/%{name}_mod_python.conf
 %{py_puresitedir}/%{name}/web/modpython_frontend.py*
 
@@ -445,27 +403,21 @@ rm -rf %{buildroot}
 # trac already does autodetection, and the default list of component
 # will try to load the default backend, and trigger a error if it cannot
 %files sqlite
-%defattr(-,root,root)
 %doc COPYING
 
 %files postgresql
-%defattr(-,root,root)
 %doc COPYING
 
 %files mysql
-%defattr(-,root,root)
 %doc COPYING
 
 %files svn
-%defattr(-,root,root)
 %doc COPYING
 
 %files wsgi
-%defattr(-,root,root)
 %doc COPYING
 
 %files -n drakwizard-%{name}
-%defattr(-,root,root)
 %doc README.wizard
 %{perl_vendorlib}/MDK/Wizard/*
 %config(noreplace) %{_sysconfdir}/wizard.d/%{name}.conf
