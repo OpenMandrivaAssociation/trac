@@ -1,0 +1,5 @@
+sources:
+  "Trac-0.12.3.tar.gz:"	3d272d6802bd2591f2ae024f7beaafa26499816f
+  "tracd.init:"	e9328ffe7e451b217de097de1a6108a516255ce3
+  "tracd.sysconfig:"	13a8227d0347750f91350f95c3c1a3de4eaf3b93
+  "Trac.pm:"	32cd6d34fde80b76a25a2410d3cb2a6cc1d4a888
