@@ -1,0 +1,51 @@
+#!/bin/sh
+#
+# Startup script for the Trac standalone server
+#
+# chkconfig: 345 86 16
+# description: Trac is a web-based software project management \
+#              and bug/issue tracking system.
+# processname: tracd
+
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+DAEMON_NAME=tracd
+PORT=8080
+AUTH=
+PROJECT=
+
+[ -f /etc/sysconfig/$DAEMON_NAME ] && . /etc/sysconfig/$DAEMON_NAME
+
+PORT="-p $PORT"
+[ -n "$AUTH" ] && for i in $AUTH ; do AUTH_="$AUTH_ --auth $i"; done && AUTH=$AUTH_
+
+
+case "$1" in
+  start)
+	[ -z "$PROJECT" ] && echo "You need to set the project path in /etc/sysconfig/$DAEMON_NAME" &&  exit 1
+	gprintf "Starting $DAEMON_NAME: "
+	daemon $DAEMON_NAME $PORT -d $AUTH $PROJECT
+	echo
+	touch /var/lock/subsys/$DAEMON_NAME
+	;;
+  stop)
+	gprintf "Shutting down $DAEMON_NAME: "
+	killproc $DAEMON_NAME
+	echo
+	rm -f /var/lock/subsys/$DAEMON_NAME
+	;;
+  status)
+	status $DAEMON_NAME
+	;;
+  reload|restart)
+	$0 stop
+	$0 start
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart|reload|status}"
+	exit 1
+esac
+
+exit 0
