@@ -12,7 +12,7 @@ Version:	0.12.1
 Release:	%mkrel 1
 License:	BSD
 Group:		Networking/WWW
-Url:		http://trac.edgewall.org/
+Url:		https://trac.edgewall.org/
 Source0:	ftp://ftp.edgewall.com/pub/trac/Trac-%{version}.tar.gz
 Source1:	tracd.init
 Source2:	tracd.sysconfig
